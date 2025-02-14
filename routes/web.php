@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 Route::get('admin/login', [AuthController::class,'getLoginForm'])->name('admin.getLoginForm');
 Route::post('admin/login', [AuthController::class,'login'])->name('admin.login');
 Route::get('admin/logout', [AuthController::class,'logout'])->name('admin.logout');
@@ -27,8 +29,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('users/edit/{id}', [UserController::class,'edit'])->name('admin.users.edit');
     Route::post('users/update/{id}', [UserController::class,'update'])->name('admin.users.update');
     Route::post('users/delete/{id}', [UserController::class,'delete'])->name('admin.users.delete');
+
+    Route::get('/', function () {
+        return view('admin.index');
+    });
 });
 
-Route::get('/', function () {
-    return view('admin.index');
-});
+

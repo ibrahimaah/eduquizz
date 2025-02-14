@@ -22,8 +22,8 @@
                     <h5 class="card-title mb-0"><i class="fas fa-users me-2"></i>المستخدمين</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">إدارة المستخدمين والإذونات.</p>
-                    <a href="#" class="btn btn-primary">عرض التفاصيل</a>
+                    <p class="card-text">إدارة المستخدمين .</p>
+                    <a href="{{ route('admin.users') }}" class="btn btn-primary">عرض التفاصيل</a>
                 </div>
             </div>
         </div>
