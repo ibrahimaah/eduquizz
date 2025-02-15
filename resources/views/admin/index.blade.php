@@ -29,5 +29,19 @@
         </div>
    
     </div>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fas fa-book me-2"></i>المواد</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">عرض المواد وإدارتها  .</p>
+                    <a href="{{ route('admin.subjects') }}" class="btn btn-primary">عرض التفاصيل</a>
+                </div>
+            </div>
+        </div> 
+   
+    </div>
 </div>
 @endsection
