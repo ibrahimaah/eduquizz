@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Subject extends Model implements HasMedia
+class Chapter extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
 
-    public function chapters()
-    {
-        return $this->hasMany(Chapter::class);
-    }
+    protected $fillable = ['subject_id', 'title', 'description','order','video_url'];
 
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\ChapterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('subjects/edit/{id}', [SubjectController::class,'edit'])->name('admin.subjects.edit');
     Route::post('subjects/update/{id}', [SubjectController::class,'update'])->name('admin.subjects.update');
     Route::post('subjects/delete/{id}', [SubjectController::class,'delete'])->name('admin.subjects.delete');
+
+    //chapters
+    Route::get('chapters/{subject_id}', [ChapterController::class, 'index'])->name('admin.chapters');
+    Route::get('chapters/create/{subject_id}', [ChapterController::class, 'create'])->name('admin.chapters.create');
+    Route::post('chapters/store/{subject_id}', [ChapterController::class, 'store'])->name('admin.chapters.store');
+    Route::get('admin/chapters/{id}', [ChapterController::class, 'show'])->name('admin.chapters.show');
+    Route::get('chapters/edit/{id}', [ChapterController::class, 'edit'])->name('admin.chapters.edit');
+    Route::post('chapters/update/{id}', [ChapterController::class, 'update'])->name('admin.chapters.update');
+    Route::post('chapters/delete/{id}', [ChapterController::class, 'delete'])->name('admin.chapters.delete');
 
 
     Route::get('/', function () {
