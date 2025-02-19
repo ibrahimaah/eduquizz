@@ -53,9 +53,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('chapters/delete/{id}', [ChapterController::class, 'delete'])->name('admin.chapters.delete');
 
 
-    Route::get('/', function () {
-        return view('admin.index');
-    });
+   
 });
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 

@@ -21,30 +21,32 @@ class ChapterController extends Controller
     public function create($subject_id)
     {
         $subject = Subject::findOrFail($subject_id);
-        return view('admin.chapters.create', compact('subject'));
+
+        // Dynamically assign the order
+        $maxOrder = Chapter::where('subject_id', $subject_id)->max('order');
+        $newOrder = $maxOrder + 1;
+
+        return view('admin.chapters.create', compact('subject','newOrder'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    { 
         $validatedData = $request->validate([
             'subject_id' => 'required|exists:subjects,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'video_url' => 'nullable|url', // Validate video_url as a valid URL
+            'newOrder' => 'required'
         ]);
-
-        // Dynamically assign the order
-        $maxOrder = Chapter::where('subject_id', $validatedData['subject_id'])->max('order');
-        $newOrder = $maxOrder + 1;
 
         $chapter = new Chapter();
         $chapter->subject_id = $validatedData['subject_id'];
         $chapter->title = $validatedData['title'];
         $chapter->description = $validatedData['description'] ?? null;
-        $chapter->order = $newOrder;
+        $chapter->order = $validatedData['newOrder'];
 
         // Store the video URL if provided
         if ($request->has('video_url')) {

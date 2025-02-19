@@ -22,6 +22,21 @@
             <form action="{{ route('admin.chapters.update', ['id' => $chapter->id]) }}" method="POST">
                 @csrf
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="newOrder" class="form-label">رقم الفصل</label>
+                            <input type="text" class="form-control" id="newOrder" name="newOrder" value="{{ $chapter->order }}" required readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">المادة</label>
+                            <input type="text" name="subject" id="" class="form-control" value="{{ $chapter->subject->title }}" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="title" class="form-label">عنوان الفصل</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ $chapter->title }}"

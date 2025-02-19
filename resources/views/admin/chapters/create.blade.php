@@ -31,6 +31,20 @@
                 <form action="{{ route('admin.chapters.store',['subject_id' => $subject->id]) }}" method="POST">
                     @csrf 
                     <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="newOrder" class="form-label">رقم الفصل</label>
+                                <input type="text" class="form-control" id="newOrder" name="newOrder" value="{{ $newOrder }}" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">المادة</label>
+                                <input type="text" name="subject" id="" class="form-control" value="{{ $subject->title }}" readonly>
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">عنوان الفصل</label>
                         <input type="text" class="form-control" id="title" name="title" required>
