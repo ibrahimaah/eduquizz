@@ -42,12 +42,12 @@
             <li><a href="{{ route('home') }}" class="active">الصفحة الرئيسية<br></a></li>
             <li><a href="#">من نحن</a></li>
             <li><a href="#">المواد التعليمية</a></li>
-            <li><a href="#">تواصل معنا</a></li>
+            {{-- <li><a href="#">تواصل معنا</a></li> --}}
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="courses.html">إنشاء حساب</a>
+      <a class="btn-getstarted" href="#">إنشاء حساب</a>
 
     </div>
   </header>
@@ -62,7 +62,7 @@
       <div class="container">
         <h2 data-aos="fade-up" data-aos-delay="100">اكتسب المعرفة اليوم <br>واصنع المستقبل غدًا</h2> 
         <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="courses.html" class="btn-get-started">هيا بنا نبدأ</a>
+          <a href="#" class="btn-get-started">هيا بنا نبدأ</a>
         </div>
       </div>
 
@@ -163,7 +163,7 @@
                 
               </div>
   
-              <h3><a href="course-details.html">الجبر</a></h3>
+              <h3><a href="#">الجبر</a></h3>
               <p class="description">مقدمة في الجبر والدوال الرياضية وكيفية استخدامها في حل المعادلات والمشاكل الرياضية المختلفة.</p>
              
             </div>
@@ -179,7 +179,7 @@
                 
               </div>
   
-              <h3><a href="course-details.html">الميكانيكا</a></h3>
+              <h3><a href="#">الميكانيكا</a></h3>
               <p class="description">دراسة قوانين الحركة والطاقة وكيفية تأثيرها على الأجسام في النظام الفيزيائي.</p>
            
             </div>
@@ -195,7 +195,7 @@
                 
               </div>
   
-              <h3><a href="course-details.html">قواعد اللغة الإنجليزية</a></h3>
+              <h3><a href="#">قواعد اللغة الإنجليزية</a></h3>
               <p class="description">دورة تدريبية لفهم القواعد الأساسية في اللغة الإنجليزية بما في ذلك النحو والمفردات.</p>
            
             </div>
