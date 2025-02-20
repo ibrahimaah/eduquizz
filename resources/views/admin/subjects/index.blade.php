@@ -12,6 +12,7 @@
             <tr>
                 <th>#</th>
                 <th>عنوان المادة</th>
+                <th>عدد المستويات</th>
                 <th>الوصف</th>
                 <th>الصورة</th>
                 <th>الإجراءات</th>
@@ -22,14 +23,12 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $subject->title }}</td>
+                <td>{{ $subject->num_of_levels }}</td>
                 <td>{{ $subject->description }}</td>
                 <td>
                     <img src="{{ $subject->getFirstMediaUrl('subjects') }}" alt="صورة المادة" width="100">
                 </td>
                 <td>
-                    <a href="{{ route('admin.chapters', ['subject_id' => $subject->id]) }}" class="btn btn-sm btn-info">
-                        إدارة الفصول
-                    </a>
                     <a href="{{ route('admin.subjects.edit', ['id' => $subject->id]) }}" class="btn btn-sm btn-warning">تعديل</a>
                     <form action="{{ route('admin.subjects.delete',  ['id' => $subject->id]) }}" method="POST" style="display:inline;">
                         @csrf 

@@ -23,12 +23,14 @@ class SubjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'num_of_levels' => 'required|integer|min:1|max:20',
             'description' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Correct validation rule for image field
         ]);
 
         $subject = new Subject();
         $subject->title = $validatedData['title'];
+        $subject->num_of_levels = $validatedData['num_of_levels'];
         $subject->description = $validatedData['description'] ?? null;
         $subject->save();
 
@@ -49,12 +51,14 @@ class SubjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'num_of_levels' => 'required|integer|min:1|max:20',
             'description' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Correct validation rule for image field
         ]);
 
         $subject = Subject::findOrFail($id);
         $subject->title = $validatedData['title'];
+        $subject->num_of_levels = $validatedData['num_of_levels'];
         $subject->description = $validatedData['description'] ?? null;
         $subject->save();
 

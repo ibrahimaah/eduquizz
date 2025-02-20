@@ -28,6 +28,11 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="num_of_levels" class="form-label">عدد المستويات</label>
+                    <input type="number" class="form-control text-start" id="num_of_levels" name="num_of_levels" value="{{ $subject->num_of_levels }}" min="1" max="20" required>
+                </div>
+
+                <div class="mb-3">
                     <label for="description" class="form-label">الوصف</label>
                     <textarea class="form-control" id="description" name="description">{{ $subject->description }}</textarea>
                 </div>
