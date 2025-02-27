@@ -32,6 +32,7 @@
                         @csrf  
                         <button type="submit" class="btn btn-sm btn-danger">حذف</button>
                     </form>
+                    <a href="{{ route('admin.questions', $lesson->id) }}" class="btn btn-sm btn-secondary">إدارة الاختبار</a>
                 </td>
             </tr>
             @endforeach

@@ -27,7 +27,7 @@ class LevelController extends Controller
         return view('admin.subjects.levels.create', ['subject' => $subject,'level_order' => $level_order]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request,$lesson_id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
