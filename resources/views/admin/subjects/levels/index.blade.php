@@ -45,5 +45,8 @@
             @endforeach
         </tbody>
     </table>
+    <div class="text-end">
+        <a href="{{ route('admin.subjects') }}" class="btn btn-danger">رجوع</a>
+    </div>
 </div>
 @endsection
