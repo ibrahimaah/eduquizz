@@ -4,7 +4,9 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-header bg-primary text-white text-center">
-            <h4>إضافة درس جديد</h4>
+            <div class="d-flex">
+                <h4>إضافة درس جديد</h4>
+            </div>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -20,22 +22,30 @@
             <form action="{{ route('admin.lessons.store', $level) }}" method="POST">
                 @csrf
                 <input type="hidden" name="level_id" value="{{ $level->id }}">
+               
+                <div class="mb-3">
+                    <label for="subject" class="form-label">المادة</label>
+                    <input type="text" class="form-control" id="subject" name="subject"  value="{{ $level->subject->title }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="level" class="form-label">المستوى</label>
+                    <input type="text" class="form-control" id="level" name="level" value="{{ $level->title }}" disabled>
+                </div>
+
+                <div class="mb-3">
+                    <label for="order" class="form-label">الترتيب</label>
+                    <input type="number" class="form-control text-start" id="order" value="{{ $lesson_order }}" name="order" min="1" readonly>
+                </div>
+
                 <div class="mb-3">
                     <label for="title" class="form-label">عنوان الدرس</label>
                     <input type="text" class="form-control" id="title" name="title" required>
-                </div>
+                </div> 
+
                 <div class="mb-3">
-                    <label for="chapter" class="form-label">الفصل</label>
-                    <select class="form-control" id="chapter" name="chapter" required>
-                        <option value="">اختر الفصل</option>
-                        <option value="chapter_1">الفصل 1</option>
-                        <option value="chapter_2">الفصل 2</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="order" class="form-label">الترتيب</label>
-                    <input type="number" class="form-control" id="order" name="order" min="1" required>
-                </div>
+                    <label for="tutorial_link" class="form-label">رابط الشرح</label>
+                    <input type="text" class="form-control" id="tutorial_link" name="tutorial_link" dir="ltr" required>
+                </div> 
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">إضافة</button>

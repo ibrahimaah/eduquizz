@@ -17,21 +17,24 @@ class LessonController extends Controller
         $lessons = $level->lessons; // Assuming you have a 'lessons' relationship defined on Level
 
         // Return the view with lessons and the level information
-        return view('admin.levels.lessons.index', compact('lessons', 'level'));
+        return view('admin.subjects.levels.lessons.index', compact('lessons', 'level'));
     }
 
 
     public function create(Level $level)
     { 
-        return view('admin.levels.lessons.create', compact('level'));
+        $lesson_order = Lesson::where('level_id',$level->id)->max('order') ?? 0;
+        $lesson_order += 1; 
+
+        return view('admin.subjects.levels.lessons.create', ['level' => $level,'lesson_order'=>$lesson_order]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'level_id' => 'required|exists:levels,id',
-            'chapter' => 'required|in:chapter_1,chapter_2',
+            'tutorial_link' => 'required|string|max:255',
+            'level_id' => 'required|exists:levels,id', 
             'order' => 'required|integer|min:1',
         ]);
 
@@ -40,23 +43,20 @@ class LessonController extends Controller
         return redirect()->route('admin.lessons',['level'=>$lesson->level_id])->with('success', 'تمت إضافة الدرس بنجاح');
     }
 
-    public function edit(Level $level,Lesson $lesson)
-    {
-        $levels = Level::all();  // Get all levels for the dropdown
-        return view('admin.levels.lessons.edit', compact('lesson', 'levels'));
+    public function edit(Lesson $lesson)
+    { 
+        return view('admin.subjects.levels.lessons.edit', ['lesson' => $lesson]);
     }
 
     public function update(Request $request, Lesson $lesson)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'level_id' => 'required|exists:levels,id',
-            'chapter' => 'required|in:chapter_1,chapter_2',
-            'order' => 'required|integer|min:1',
+            'tutorial_link' => 'required|string|max:255', 
         ]);
 
         $lesson->update($request->all());
-        return redirect()->route('admin.lessons')->with('success', 'تم تعديل الدرس بنجاح');
+        return redirect()->route('admin.lessons',['level'=>$lesson->level_id])->with('success', 'تم تعديل الدرس بنجاح');
     }
 
     public function delete(Lesson $lesson)

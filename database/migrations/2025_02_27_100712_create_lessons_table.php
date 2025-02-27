@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('level_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->enum('chapter', ['chapter_1', 'chapter_2']);
             $table->text('description')->nullable();
             $table->integer('order'); // Order of the lesson within a level
+            $table->string('tutorial_link');
             $table->timestamps();
         });
     }

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="d-flex">
-        <h1 class="text-success m-4">إدارة المستويات</h1>
-        <h2 class="h1 text-info m-4">(مادة {{ $subject->title }})</h2>
+        <h1 class="text-success m-4">إدارة المستويات - {{ $subject->title }}</h1>
+        
     </div>
     <a href="{{ route('admin.levels.create',['subject_id' => $subject->id]) }}" class="btn btn-primary mb-3">إضافة مستوى جديد</a>
 
@@ -12,7 +12,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
         <thead>
             <tr>
                 <th>#</th>
@@ -24,10 +24,10 @@
         <tbody>
             @foreach ($levels as $level)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $level->title }}</td>
-                <td>{{ $level->order }}</td>
-                <td>
+                <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ $level->title }}</td>
+                <td class="align-middle">{{ $level->order }}</td>
+                <td class="align-middle">
                     <!-- Edit Level Button -->
                     <a href="{{ route('admin.levels.edit', $level->id) }}" class="btn btn-sm btn-warning">تعديل</a>
                 
@@ -38,7 +38,7 @@
                     </form>
                 
                     <!-- View Lessons Button for this Level -->
-                    <a href="{{ route('admin.lessons', ['level' => $level->id]) }}" class="btn btn-sm btn-secondary">عرض الدروس</a>
+                    <a href="{{ route('admin.lessons', ['level' => $level->id]) }}" class="btn btn-sm btn-secondary">إدارة الدروس</a>
                 </td>
                 
             </tr>

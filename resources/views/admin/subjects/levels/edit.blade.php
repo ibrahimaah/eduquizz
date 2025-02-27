@@ -21,6 +21,11 @@
                 @csrf
                 
                 <div class="mb-3">
+                    <label for="subject" class="form-label">المادة</label>
+                    <input type="text" class="form-control" id="subject" name="subject" value="{{ $level->subject->title }}" disabled>
+                </div>
+
+                <div class="mb-3">
                     <label for="title" class="form-label">عنوان المستوى</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ $level->title }}" required>
                 </div> 

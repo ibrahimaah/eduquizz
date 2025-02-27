@@ -11,7 +11,7 @@ class Lesson extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['level_id', 'title', 'chapter', 'description', 'order'];
+    protected $fillable = ['level_id', 'title','tutorial_link', 'description', 'order'];
 
     public function level()
     {

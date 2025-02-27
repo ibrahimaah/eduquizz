@@ -56,10 +56,10 @@ Route::middleware(['auth'])->group(function ()
 
      
     // Lessons 
-    Route::get('lessons/{level}', [LessonController::class, 'index'])->name('admin.lessons');
-    Route::get('lessons/create/{level}', [LessonController::class, 'create'])->name('admin.lessons.create');
+    Route::get('levels/{level}/lessons', [LessonController::class, 'index'])->name('admin.lessons');
+    Route::get('levels/{level}/lessons/create', [LessonController::class, 'create'])->name('admin.lessons.create');
     Route::post('lessons/{level}', [LessonController::class, 'store'])->name('admin.lessons.store');
-    Route::get('lessons/{level}/{lesson}/edit', [LessonController::class, 'edit'])->name('admin.lessons.edit');
+    Route::get('lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('admin.lessons.edit');
     Route::post('lessons/update/{lesson}', [LessonController::class, 'update'])->name('admin.lessons.update');
     Route::post('lessons/delete/{lesson}', [LessonController::class, 'delete'])->name('admin.lessons.delete');
 
