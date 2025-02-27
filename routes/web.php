@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LessonController;
+use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -43,17 +45,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('subjects/update/{id}', [SubjectController::class,'update'])->name('admin.subjects.update');
     Route::post('subjects/delete/{id}', [SubjectController::class,'delete'])->name('admin.subjects.delete');
 
-    //chapters
-    Route::get('chapters/{subject_id}', [ChapterController::class, 'index'])->name('admin.chapters');
-    Route::get('chapters/create/{subject_id}', [ChapterController::class, 'create'])->name('admin.chapters.create');
-    Route::post('chapters/store/{subject_id}', [ChapterController::class, 'store'])->name('admin.chapters.store');
-    Route::get('admin/chapters/{id}', [ChapterController::class, 'show'])->name('admin.chapters.show');
-    Route::get('chapters/edit/{id}', [ChapterController::class, 'edit'])->name('admin.chapters.edit');
-    Route::post('chapters/update/{id}', [ChapterController::class, 'update'])->name('admin.chapters.update');
-    Route::post('chapters/delete/{id}', [ChapterController::class, 'delete'])->name('admin.chapters.delete');
+    //levels
+    Route::get('levels', [LevelController::class, 'index'])->name('admin.levels');
+    Route::get('levels/create', [LevelController::class, 'create'])->name('admin.levels.create');
+    Route::post('levels', [LevelController::class, 'store'])->name('admin.levels.store');
+    Route::get('levels/{level}/edit', [LevelController::class, 'edit'])->name('admin.levels.edit');
+    Route::post('levels/update/{level}', [LevelController::class, 'update'])->name('admin.levels.update');
+    Route::post('levels/delete/{level}', [LevelController::class, 'delete'])->name('admin.levels.delete');
+
+     
+    // Lessons 
+    Route::get('lessons/{level}', [LessonController::class, 'index'])->name('admin.lessons');
+    Route::get('lessons/create/{level}', [LessonController::class, 'create'])->name('admin.lessons.create');
+    Route::post('lessons/{level}', [LessonController::class, 'store'])->name('admin.lessons.store');
+    Route::get('lessons/{level}/{lesson}/edit', [LessonController::class, 'edit'])->name('admin.lessons.edit');
+    Route::post('lessons/update/{lesson}', [LessonController::class, 'update'])->name('admin.lessons.update');
+    Route::post('lessons/delete/{lesson}', [LessonController::class, 'delete'])->name('admin.lessons.delete');
 
 
-   
 });
 
 Route::get('/', function () {

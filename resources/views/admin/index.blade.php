@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">عرض الإحصائيات والأرقام المهمة.</p>
-                    <a href="#" class="btn btn-primary">عرض التفاصيل</a>
+                    <a href="{{ route('admin.statistics') }}" class="btn btn-primary">عرض التفاصيل</a>
                 </div>
             </div>
         </div>
@@ -30,6 +30,7 @@
    
     </div>
     <div class="row">
+        <!-- Subjects Card -->
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header">
@@ -40,8 +41,20 @@
                     <a href="{{ route('admin.subjects') }}" class="btn btn-primary">عرض التفاصيل</a>
                 </div>
             </div>
-        </div> 
-   
+        </div>
+
+        <!-- Levels Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fas fa-layer-group me-2"></i>المستويات</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">عرض المستويات وإدارتها.</p>
+                    <a href="{{ route('admin.levels') }}" class="btn btn-primary">عرض التفاصيل</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
