@@ -15,7 +15,7 @@ return new class extends Migration
         {
             $table->id();
             $table->string('title');
-            $table->integer('num_of_levels');
+            // $table->integer('num_of_levels');
             $table->text('description')->nullable();
             $table->timestamps();
         });

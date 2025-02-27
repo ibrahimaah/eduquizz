@@ -27,27 +27,28 @@ Route::post('admin/login', [AuthController::class,'login'])->name('admin.login')
 Route::get('admin/logout', [AuthController::class,'logout'])->name('admin.logout');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () 
+{
     Route::get('admin', [HomeController::class,'index'])->name('admin_dashboard');
     Route::get('statistics', [StatisticController::class,'index'])->name('admin.statistics');
     Route::get('users', [UserController::class,'index'])->name('admin.users');
     Route::get('users/create', [UserController::class,'create'])->name('admin.users.create');
     Route::post('users/store', [UserController::class,'store'])->name('admin.users.store');
-    Route::get('users/edit/{id}', [UserController::class,'edit'])->name('admin.users.edit');
-    Route::post('users/update/{id}', [UserController::class,'update'])->name('admin.users.update');
-    Route::post('users/delete/{id}', [UserController::class,'delete'])->name('admin.users.delete');
+    Route::get('users/{id}/edit', [UserController::class,'edit'])->name('admin.users.edit');
+    Route::post('users/{id}/update', [UserController::class,'update'])->name('admin.users.update');
+    Route::post('users/{id}/delete', [UserController::class,'delete'])->name('admin.users.delete');
 
     //subjects
     Route::get('subjects', [SubjectController::class,'index'])->name('admin.subjects');
     Route::get('subjects/create', [SubjectController::class,'create'])->name('admin.subjects.create');
     Route::post('subjects/store', [SubjectController::class,'store'])->name('admin.subjects.store');
-    Route::get('subjects/edit/{id}', [SubjectController::class,'edit'])->name('admin.subjects.edit');
-    Route::post('subjects/update/{id}', [SubjectController::class,'update'])->name('admin.subjects.update');
-    Route::post('subjects/delete/{id}', [SubjectController::class,'delete'])->name('admin.subjects.delete');
+    Route::get('subjects/{id}/edit', [SubjectController::class,'edit'])->name('admin.subjects.edit');
+    Route::post('subjects/{id}/update', [SubjectController::class,'update'])->name('admin.subjects.update');
+    Route::post('subjects/{id}/delete', [SubjectController::class,'delete'])->name('admin.subjects.delete');
 
     //levels
-    Route::get('levels', [LevelController::class, 'index'])->name('admin.levels');
-    Route::get('levels/create', [LevelController::class, 'create'])->name('admin.levels.create');
+    Route::get('subjects/{subject_id}/levels', [LevelController::class, 'index'])->name('admin.levels');
+    Route::get('subjects/{subject_id}/levels/create', [LevelController::class, 'create'])->name('admin.levels.create');
     Route::post('levels', [LevelController::class, 'store'])->name('admin.levels.store');
     Route::get('levels/{level}/edit', [LevelController::class, 'edit'])->name('admin.levels.edit');
     Route::post('levels/update/{level}', [LevelController::class, 'update'])->name('admin.levels.update');

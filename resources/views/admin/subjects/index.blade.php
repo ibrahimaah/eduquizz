@@ -7,12 +7,11 @@
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
         <thead>
             <tr>
                 <th>#</th>
-                <th>عنوان المادة</th>
-                <th>عدد المستويات</th>
+                <th>عنوان المادة</th> 
                 <th>الوصف</th>
                 <th>الصورة</th>
                 <th>الإجراءات</th>
@@ -21,19 +20,19 @@
         <tbody>
             @foreach ($subjects as $subject)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $subject->title }}</td>
-                <td>{{ $subject->num_of_levels }}</td>
-                <td>{{ $subject->description }}</td>
-                <td>
+                <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ $subject->title }}</td>  
+                <td class="align-middle">{{ $subject->description }}</td>
+                <td class="align-middle">
                     <img src="{{ $subject->getFirstMediaUrl('subjects') }}" alt="صورة المادة" width="100">
                 </td>
-                <td>
+                <td class="align-middle">
                     <a href="{{ route('admin.subjects.edit', ['id' => $subject->id]) }}" class="btn btn-sm btn-warning">تعديل</a>
                     <form action="{{ route('admin.subjects.delete',  ['id' => $subject->id]) }}" method="POST" style="display:inline;">
                         @csrf 
                         <button type="submit" class="btn btn-sm btn-danger">حذف</button>
                     </form>
+                    <a href="{{ route('admin.levels', ['subject_id' => $subject->id]) }}" class="btn btn-sm btn-secondary">إدارة المستويات</a>
                 </td>
             </tr>
             @endforeach

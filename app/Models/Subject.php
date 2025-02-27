@@ -11,9 +11,14 @@ class Subject extends Model implements HasMedia
 {
     use HasFactory,InteractsWithMedia;
 
-    public function chapters()
+    // public function chapters()
+    // {
+    //     return $this->hasMany(Chapter::class);
+    // }
+
+    public function levels()
     {
-        return $this->hasMany(Chapter::class);
+        return $this->hasMany(Level::class);
     }
 
 

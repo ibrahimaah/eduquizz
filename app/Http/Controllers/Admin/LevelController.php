@@ -9,16 +9,22 @@ use App\Models\Subject;
 
 class LevelController extends Controller
 {
-    public function index()
+    public function index($subject_id)
     {
-        $levels = Level::with('subject')->get();
-        return view('admin.levels.index', compact('levels'));
+        $subject = Subject::findOrFail($subject_id);
+        $subject_levels = $subject->levels;
+        return view('admin.subjects.levels.index', ['levels' => $subject_levels,
+                                                    'subject' => $subject]);
     }
 
-    public function create()
-    {
-        $subjects = Subject::all();
-        return view('admin.levels.create', compact('subjects'));
+    public function create($subject_id)
+    {    
+        $subject = Subject::findOrFail($subject_id); 
+
+        $level_order = Level::where('subject_id',$subject_id)->max('order') ?? 0;
+        $level_order += 1; 
+
+        return view('admin.subjects.levels.create', ['subject' => $subject,'level_order' => $level_order]);
     }
 
     public function store(Request $request)
@@ -30,30 +36,27 @@ class LevelController extends Controller
         ]);
 
         Level::create($request->all());
-        return redirect()->route('admin.levels')->with('success', 'تمت إضافة المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject_id' => $request->subject_id])->with('success', 'تمت إضافة المستوى بنجاح');
     }
 
     public function edit(Level $level)
-    {
-        $subjects = Subject::all();
-        return view('admin.levels.edit', compact('level', 'subjects'));
+    { 
+        return view('admin.subjects.levels.edit', ['level' => $level]);
     }
 
     public function update(Request $request, Level $level)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'subject_id' => 'required|exists:subjects,id',
-            'order' => 'required|integer|min:1',
+            'title' => 'required|string|max:255'
         ]);
 
         $level->update($request->all());
-        return redirect()->route('admin.levels')->with('success', 'تم تعديل المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject_id' => $level->subject_id])->with('success', 'تم تعديل المستوى بنجاح');
     }
 
     public function delete(Level $level)
     {
         $level->delete();
-        return redirect()->route('admin.levels')->with('success', 'تم حذف المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject_id' => $level->subject_id])->with('success', 'تم حذف المستوى بنجاح');
     }
 }

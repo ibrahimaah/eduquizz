@@ -2,8 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-success m-4">إدارة المستويات</h1>
-    <a href="{{ route('admin.levels.create') }}" class="btn btn-primary mb-3">إضافة مستوى جديد</a>
+    <div class="d-flex">
+        <h1 class="text-success m-4">إدارة المستويات</h1>
+        <h2 class="h1 text-info m-4">(مادة {{ $subject->title }})</h2>
+    </div>
+    <a href="{{ route('admin.levels.create',['subject_id' => $subject->id]) }}" class="btn btn-primary mb-3">إضافة مستوى جديد</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -14,7 +17,6 @@
             <tr>
                 <th>#</th>
                 <th>عنوان المستوى</th>
-                <th>المادة</th>
                 <th>الترتيب</th>
                 <th>الإجراءات</th>
             </tr>
@@ -24,7 +26,6 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $level->title }}</td>
-                <td>{{ $level->subject->title }}</td>
                 <td>{{ $level->order }}</td>
                 <td>
                     <!-- Edit Level Button -->
@@ -37,7 +38,7 @@
                     </form>
                 
                     <!-- View Lessons Button for this Level -->
-                    <a href="{{ route('admin.lessons', ['level' => $level->id]) }}" class="btn btn-sm btn-info">عرض الدروس</a>
+                    <a href="{{ route('admin.lessons', ['level' => $level->id]) }}" class="btn btn-sm btn-secondary">عرض الدروس</a>
                 </td>
                 
             </tr>

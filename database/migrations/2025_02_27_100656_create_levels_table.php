@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->integer('order'); // Order of the level within a subject
             $table->timestamps();
+
+            // Add a composite unique index on subject_id and order
+            $table->unique(['subject_id', 'order']);
         });
     }
 
