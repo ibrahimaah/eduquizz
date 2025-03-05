@@ -49,17 +49,56 @@
         <div id="multipleChoiceOptions" class="mb-3" style="{{ $question->type == 'multiple_choice' ? '' : 'display:none;' }}">
             <label class="form-label">الخيارات</label>
             <div id="optionsContainer">
-                @foreach($question->options as $index => $option)
-                <div class="input-group mb-2">
-                    <div class="w-50">
-                        <input type="text" name="options[]" class="form-control" value="{{ $option->option_text }}" placeholder="الخيار">
+                @if($question->options()->exists())
+                    @foreach($question->options as $index => $option)
+                        <div class="input-group mb-2">
+                            <div class="w-50">
+                                <input type="text" name="options[]" class="form-control" value="{{ $option->option_text }}" placeholder="الخيار">
+                            </div>
+                            <div class="d-flex align-items-center ms-2">
+                                <input type="radio" name="is_correct" value="{{ $index }}" class="radio-btn" {{ $option->is_correct ? 'checked' : '' }}>
+                                <span class="ms-2">صحيح؟</span>
+                            </div>
+                        </div>
+                    @endforeach
+                @else   
+                    <div class="input-group mb-2">
+                        <div class="w-50">
+                            <input type="text" name="options[]" class="form-control" placeholder="الخيار">
+                        </div>
+                        <div class="d-flex align-items-center ms-2">
+                            <input type="radio" name="is_correct" value="0" class="radio-btn">
+                            <span class="ms-2">صحيح؟</span>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center ms-2">
-                        <input type="radio" name="is_correct" value="{{ $index }}" class="radio-btn" {{ $option->is_correct ? 'checked' : '' }}>
-                        <span class="ms-2">صحيح؟</span>
+                    <div class="input-group mb-2">
+                        <div class="w-50">
+                            <input type="text" name="options[]" class="form-control" placeholder="الخيار">
+                        </div>
+                        <div class="d-flex align-items-center ms-2">
+                            <input type="radio" name="is_correct" value="1" class="radio-btn">
+                            <span class="ms-2">صحيح؟</span>
+                        </div>
                     </div>
-                </div>
-                @endforeach
+                    <div class="input-group mb-2">
+                        <div class="w-50">
+                            <input type="text" name="options[]" class="form-control" placeholder="الخيار">
+                        </div>
+                        <div class="d-flex align-items-center ms-2">
+                            <input type="radio" name="is_correct" value="2" class="radio-btn">
+                            <span class="ms-2">صحيح؟</span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="w-50">
+                            <input type="text" name="options[]" class="form-control" placeholder="الخيار">
+                        </div>
+                        <div class="d-flex align-items-center ms-2">
+                            <input type="radio" name="is_correct" value="3" class="radio-btn">
+                            <span class="ms-2">صحيح؟</span>
+                        </div>
+                    </div>
+                @endif   
             </div>
         </div>
 
@@ -76,11 +115,12 @@ document.addEventListener("DOMContentLoaded", function() {
     let trueFalseOptions = document.getElementById("trueFalseOptions");
     let multipleChoiceOptions = document.getElementById("multipleChoiceOptions");
 
-    function toggleOptions() {
+    function toggleOptions() 
+    {
         if (questionType.value === "true_false") {
             trueFalseOptions.style.display = "block";
             multipleChoiceOptions.style.display = "none";
-        } else {
+        } else { 
             trueFalseOptions.style.display = "none";
             multipleChoiceOptions.style.display = "block";
         }

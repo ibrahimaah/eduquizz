@@ -27,12 +27,12 @@
                     <img src="{{ $subject->getFirstMediaUrl('subjects') }}" alt="صورة المادة" width="100">
                 </td>
                 <td class="align-middle">
-                    <a href="{{ route('admin.subjects.edit', ['id' => $subject->id]) }}" class="btn btn-sm btn-warning">تعديل</a>
-                    <form action="{{ route('admin.subjects.delete',  ['id' => $subject->id]) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('admin.subjects.edit', $subject->id) }}" class="btn btn-sm btn-warning">تعديل</a>
+                    <form action="{{ route('admin.subjects.delete',  $subject->id) }}" method="POST" style="display:inline;">
                         @csrf 
                         <button type="submit" class="btn btn-sm btn-danger">حذف</button>
                     </form>
-                    <a href="{{ route('admin.levels', ['subject_id' => $subject->id]) }}" class="btn btn-sm btn-secondary">إدارة المستويات</a>
+                    <a href="{{ route('admin.levels', $subject->id) }}" class="btn btn-sm btn-secondary">إدارة المستويات</a>
                 </td>
             </tr>
             @endforeach

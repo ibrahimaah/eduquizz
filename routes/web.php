@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\AuthController as SiteAuthController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\PlacementTestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +47,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         Route::post('users/{user}/delete', 'delete')->name('admin.users.delete');
     });
 
-
     //Subjects
     Route::controller(SubjectController::class)->group(function () {
         Route::get('subjects', 'index')->name('admin.subjects');
@@ -56,7 +57,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         Route::post('subjects/{subject}/delete', 'delete')->name('admin.subjects.delete');
     });
     
-
     //Levels
     Route::controller(LevelController::class)->group(function () {
         Route::get('subjects/{subject}/levels', 'index')->name('admin.levels');
@@ -66,8 +66,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         Route::post('levels/{level}/update', 'update')->name('admin.levels.update');
         Route::post('levels/{level}/delete', 'delete')->name('admin.levels.delete');
     });
-    
-
      
     // Lessons 
     Route::controller(LessonController::class)->group(function () {
@@ -90,10 +88,18 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
         Route::post('questions/{question}/delete', 'delete')->name('admin.questions.delete');
     });
     
-
-
-
 });
+
+Route::middleware(['auth'])->group(function () 
+{
+    
+});
+Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
+Route::get('placement-test-questions',[PlacementTestController::class,'index'])->name('placement_test');
+Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLoginForm');
+Route::post('login',[SiteAuthController::class,'login'])->name('login');
+Route::get('register',[SiteAuthController::class,'showRegisterForm'])->name('showRegisterForm');
+Route::post('register',[SiteAuthController::class,'register'])->name('register');
 
 Route::get('/', function () {
     return view('home');

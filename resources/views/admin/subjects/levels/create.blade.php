@@ -36,7 +36,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">إضافة</button>
-                    <a href="{{ route('admin.levels',['subject_id' => $subject->id]) }}" class="btn btn-secondary">إلغاء</a>
+                    <a href="{{ route('admin.levels', $subject->id) }}" class="btn btn-secondary">إلغاء</a>
                 </div>
             </form>
         </div>

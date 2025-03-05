@@ -20,24 +20,34 @@
     <form action="{{ route('admin.questions.store', $lesson->id) }}" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label for="order" class="form-label">رقم السؤال</label>
-            <input type="number" class="form-control text-start" id="order" name="question_number" value="{{ $question_number }}" min="1" readonly required>
+        
+
+
+        <div class="row">
+            <div class="mb-3">
+                <label class="form-label">السؤال</label>
+                <input type="text" name="question" class="form-control" required>
+            </div>
         </div>
 
-
-        <div class="mb-3">
-            <label class="form-label">السؤال</label>
-            <input type="text" name="question" class="form-control" required>
-        </div>
-
-
-        <div class="mb-3">
-            <label class="form-label">نوع السؤال</label>
-            <select name="type" class="form-control" id="questionType" required>
-                <option value="multiple_choice">اختيار من متعدد</option>
-                <option value="true_false">صح/خطأ</option>
-            </select>
+        <div class="row">
+           
+    
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">نوع السؤال</label>
+                    <select name="type" class="form-control" id="questionType" required>
+                        <option value="multiple_choice">اختيار من متعدد</option>
+                        <option value="true_false">صح/خطأ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="order" class="form-label">رقم السؤال</label>
+                    <input type="number" class="form-control text-start" id="order" name="question_number" value="{{ $question_number }}" min="1" readonly required>
+                </div>
+            </div>
         </div>
 
         <div id="trueFalseOptions" class="mb-3">
@@ -99,25 +109,21 @@
     </form>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    let questionType = document.getElementById("questionType");
-    let trueFalseOptions = document.getElementById("trueFalseOptions");
-    let multipleChoiceOptions = document.getElementById("multipleChoiceOptions");
 
-    function toggleOptions() {
-        if (questionType.value === "true_false") {
-            trueFalseOptions.style.display = "block";
-            multipleChoiceOptions.style.display = "none";
-        } else {
-            trueFalseOptions.style.display = "none";
-            multipleChoiceOptions.style.display = "block";
-        }
-    }
-
-    questionType.addEventListener("change", toggleOptions);
-    toggleOptions();
-});
-
-</script>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            let $questionType = $("#questionType"),
+                $trueFalseOptions = $("#trueFalseOptions"),
+                $multipleChoiceOptions = $("#multipleChoiceOptions");
+
+            $questionType.on("change", function () {
+                $trueFalseOptions.toggle($questionType.val() === "true_false");
+                $multipleChoiceOptions.toggle($questionType.val() !== "true_false");
+            }).trigger("change");
+        });
+    </script>
+@endpush 

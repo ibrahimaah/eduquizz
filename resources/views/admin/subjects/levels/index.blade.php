@@ -6,7 +6,7 @@
         <h1 class="text-success m-4">إدارة المستويات - {{ $subject->title }}</h1>
         
     </div>
-    <a href="{{ route('admin.levels.create',['subject_id' => $subject->id]) }}" class="btn btn-primary mb-3">إضافة مستوى جديد</a>
+    <a href="{{ route('admin.levels.create', $subject->id) }}" class="btn btn-primary mb-3">إضافة مستوى جديد</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -38,7 +38,7 @@
                     </form>
                 
                     <!-- View Lessons Button for this Level -->
-                    <a href="{{ route('admin.lessons', ['level' => $level->id]) }}" class="btn btn-sm btn-secondary">إدارة الدروس</a>
+                    <a href="{{ route('admin.lessons',  $level->id) }}" class="btn btn-sm btn-secondary">إدارة الدروس</a>
                 </td>
                 
             </tr>

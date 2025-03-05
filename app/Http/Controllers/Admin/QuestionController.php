@@ -36,7 +36,7 @@ class QuestionController extends Controller
             'correct_answer' => 'required_if:type,true_false|in:0,1', // Valid for true/false question types
             'is_correct' => 'required_if:type,multiple_choice|integer|in:0,1,2,3', // Ensuring is_correct is provided for multiple choice
         ]);
-
+        
         DB::beginTransaction();
         // Create the question with validated data
         $question = Question::create([
@@ -63,12 +63,12 @@ class QuestionController extends Controller
 
     public function edit(Question $question)
     {
-        return view('admin.questions.edit', [ 
+        return view('admin.questions.edit', [
             'question' => $question
         ]);
     }
 
-    public function update(Request $request,Question $question)
+    public function update(Request $request, Question $question)
     {
         // Validation rules
         $validated = $request->validate([
@@ -83,32 +83,44 @@ class QuestionController extends Controller
 
         DB::beginTransaction();
 
+
         // Update the question
-        $question->update([
+        $updateData = [
             'question' => $validated['question'],
             'type' => $validated['type'],
-            'correct_answer' => $validated['correct_answer'] ?? $question->correct_answer, // Only update if available
-        ]);
+        ];
 
-        // Update options for multiple choice questions if applicable
-        if ($validated['type'] === 'multiple_choice') {
-            // Delete existing options before updating
-            $question->options()->delete();
+        if ($validated['type'] === 'multiple_choice') 
+        {
+            // Delete existing options before updating (if any)
+            $question->options()->exists() && $question->options()->delete();
 
-            foreach ($validated['options'] as $index => $option) {
+            // Update multiple-choice options
+            foreach ($validated['options'] as $index => $option) 
+            {
                 $question->options()->create([
                     'option_text' => $option,
-                    'is_correct' => ($validated['is_correct'] == $index) ? true : false, // Mark the correct option
+                    'is_correct' => $validated['is_correct'] == $index, // Mark the correct option
                 ]);
             }
+        } 
+        else 
+        {
+            $question->options()->exists() && $question->options()->delete();
+            $updateData['correct_answer'] = $validated['correct_answer'];
         }
+
+        // Apply the update
+        $question->update($updateData);
+
 
         DB::commit();
 
         return redirect()->route('admin.questions', $question->lesson->id)->with('success', 'تم تحديث السؤال بنجاح');
     }
 
-    public function delete(Question $question) {
+    public function delete(Question $question)
+    {
         $question->delete();
         return redirect()->route('admin.questions', $question->lesson->id)->with('success', 'تم حذف السؤال بنجاح');
     }

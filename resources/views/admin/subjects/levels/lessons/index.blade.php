@@ -40,7 +40,7 @@
     </table>
 
     <div class="text-end">
-        <a href="{{ route('admin.levels',['subject_id' => $level->subject_id]) }}" class="btn btn-danger">رجوع</a>
+        <a href="{{ route('admin.levels', $level->subject_id ) }}" class="btn btn-danger">رجوع</a>
     </div>
 </div>
 @endsection
