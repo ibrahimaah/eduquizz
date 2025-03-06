@@ -32,14 +32,14 @@
     <!-- Levels Section -->
     <section id="levels-section" class="section">
       <div class="container" data-aos="fade-up">
-        <div class="row">
+        <div class="row justify-content-center">
           @foreach($levels as $level)
-          <div class="col-md-4">
+          <div class="col-md-8">
             <a href="{{ route('level.lessons', ['level' => $level->id]) }}" class="text-decoration-none">
               <div class="card level-card shadow-sm p-3 mb-4 text-center">
                 <div class="card-body">
                   <h4 class="card-title">{{ $level->title }}</h4>
-                  <p class="text-muted">رقم المستوى {{ $level->order }}</p>
+                  {{-- <p class="text-muted"> المستوى {{ $level->order }}</p> --}}
                 </div>
               </div>
             </a>

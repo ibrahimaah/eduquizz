@@ -28,7 +28,7 @@ class PlacementTestController extends Controller
         
         $results = [];
         $score = 0;
-        $totalQuestions = PlacementTestQuestion::count();
+        // $totalQuestions = PlacementTestQuestion::count();
 
         foreach ($userAnswers as $key => $selectedOptionId) {
             if (str_starts_with($key, 'question_')) {
@@ -40,8 +40,16 @@ class PlacementTestController extends Controller
                     $correctOption = $question->options()->where('is_correct', true)->first();
                     $isCorrect = $correctOption && $correctOption->id == $selectedOptionId;
 
-                    if ($isCorrect) {
-                        $score++;
+                    if ($isCorrect) 
+                    {
+                        if ($question->level == 'easy') {
+                            $score += 1;
+                        } elseif ($question->level == 'medium') {
+                            $score += 2;
+                        } elseif ($question->level == 'hard') {
+                            $score += 3;
+                        }
+                     
                     }
 
                     $results[] = [
@@ -54,8 +62,26 @@ class PlacementTestController extends Controller
             }
         }
 
-        $percentage = round(($score / $totalQuestions) * 100, 2);
+        // $percentage = round(($score / $totalQuestions) * 100, 2);
+ 
+        // Calculate the user level based on the score
+        $student_level = "Beginner";
+        
+        if ($score >= 0 && $score <= 8) 
+        {
+            $student_level = 'Beginner';
+        } 
+        elseif ($score >= 9 && $score <= 16) 
+        {
+            $student_level = 'Intermediate';
+        } 
+        else 
+        {
+            $student_level = 'Advanced';
+        }  
+ 
 
-        return view('site.placement_test.feedback', compact('results', 'score', 'totalQuestions', 'percentage'));
+        // return view('site.placement_test.feedback', compact('results', 'score', 'totalQuestions', 'percentage'));
+        return view('site.placement_test.feedback', compact('results', 'score','student_level'));
     }
 }

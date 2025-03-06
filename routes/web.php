@@ -105,6 +105,7 @@ Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLogin
 Route::post('login',[SiteAuthController::class,'login'])->name('login');
 Route::get('register',[SiteAuthController::class,'showRegisterForm'])->name('showRegisterForm');
 Route::post('register',[SiteAuthController::class,'register'])->name('register');
+Route::post('logout',[SiteAuthController::class,'logout'])->name('logout');
 
 
 Route::get('subjects/{subject}/levels',[SiteLevelController::class,'index'])->name('subject.levels');

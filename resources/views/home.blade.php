@@ -100,7 +100,7 @@
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>مواد دراسية</h2>
-    <p>المواد الدراسية الشائعة</p>
+    <p>المواد الدراسية المتاحة</p>
   </div><!-- End Section Title -->
 
   <div class="container">
@@ -112,12 +112,13 @@
         <div class="course-item">
           <img src="{{ $subject->getFirstMediaUrl('subjects') }}" class="img-fluid" alt="...">
           <div class="course-content">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="category">برمجة</p>
-
+            <div class="d-flex justify-content-center align-items-center mb-3">
+              
+                <a href="{{ route('subject.levels',$subject->id) }}" class="btn btn-success">{{ $subject->title }}</a>
+               
             </div>
 
-            <h3><a href="{{ route('subject.levels',$subject->id) }}">{{ $subject->title }}</a></h3>
+            {{-- <h3><a href="{{ route('subject.levels',$subject->id) }}">{{ $subject->title }}</a></h3> --}}
             <p class="description">
               {{ $subject->description }}
             </p>
