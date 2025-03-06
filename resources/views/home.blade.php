@@ -117,7 +117,7 @@
 
             </div>
 
-            <h3><a href="">{{ $subject->title }}</a></h3>
+            <h3><a href="{{ route('subject.levels',$subject->id) }}">{{ $subject->title }}</a></h3>
             <p class="description">
               {{ $subject->description }}
             </p>

@@ -40,7 +40,8 @@ class LessonController extends Controller
 
         $lesson = Lesson::create($request->all());
 
-        return redirect()->route('admin.lessons',['level'=>$lesson->level_id])->with('success', 'تمت إضافة الدرس بنجاح');
+        // return redirect()->route('admin.lessons',['level'=>$lesson->level_id])->with('success', 'تمت إضافة الدرس بنجاح');
+        return redirect()->back()->with('success', 'تمت إضافة الدرس بنجاح');
     }
 
     public function edit(Lesson $lesson)

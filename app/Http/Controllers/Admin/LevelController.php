@@ -27,7 +27,7 @@ class LevelController extends Controller
         return view('admin.subjects.levels.create', ['subject' => $subject,'level_order' => $level_order]);
     }
 
-    public function store(Request $request,$lesson_id)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -36,7 +36,7 @@ class LevelController extends Controller
         ]);
 
         Level::create($request->all());
-        return redirect()->route('admin.levels',['subject_id' => $request->subject_id])->with('success', 'تمت إضافة المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject' => $request->subject_id])->with('success', 'تمت إضافة المستوى بنجاح');
     }
 
     public function edit(Level $level)
@@ -51,12 +51,12 @@ class LevelController extends Controller
         ]);
 
         $level->update($request->all());
-        return redirect()->route('admin.levels',['subject_id' => $level->subject_id])->with('success', 'تم تعديل المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject' => $level->subject_id])->with('success', 'تم تعديل المستوى بنجاح');
     }
 
     public function delete(Level $level)
     {
         $level->delete();
-        return redirect()->route('admin.levels',['subject_id' => $level->subject_id])->with('success', 'تم حذف المستوى بنجاح');
+        return redirect()->route('admin.levels',['subject' => $level->subject_id])->with('success', 'تم حذف المستوى بنجاح');
     }
 }

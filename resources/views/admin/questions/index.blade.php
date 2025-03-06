@@ -25,9 +25,9 @@
             <tr>
                 <td class="align-middle">{{ $loop->iteration }}</td>
                 <td class="align-middle">{{ $question->question_number }}</td>
-                <td class="align-middle">{{ $question->question }}</td>
+                <td class="align-middle w-50">{{ $question->question }}</td>
                 <td class="align-middle">{{ $question->type == 'multiple_choice' ? 'اختيار من متعدد' : 'صح/خطأ' }}</td>
-                <td class="align-middle">
+                <td class="align-middle w-25">
                     <a href="{{ route('admin.questions.edit', $question->id) }}" class="btn btn-sm btn-warning">تعديل</a>
                     <form action="{{ route('admin.questions.delete', $question->id) }}" method="POST" style="display:inline;">
                         @csrf  

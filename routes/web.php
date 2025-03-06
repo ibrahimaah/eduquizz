@@ -13,6 +13,9 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\PlacementTestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController as SiteHomeController;
+use App\Http\Controllers\LevelController as SiteLevelController;
+use App\Http\Controllers\LessonController as SiteLessonController;
+use App\Http\Controllers\LessonQuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +105,14 @@ Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLogin
 Route::post('login',[SiteAuthController::class,'login'])->name('login');
 Route::get('register',[SiteAuthController::class,'showRegisterForm'])->name('showRegisterForm');
 Route::post('register',[SiteAuthController::class,'register'])->name('register');
+
+
+Route::get('subjects/{subject}/levels',[SiteLevelController::class,'index'])->name('subject.levels');
+Route::get('levels/{level}/lessons',[SiteLessonController::class,'index'])->name('level.lessons');
+Route::get('lessons/{lesson}/quiz',[LessonQuizController::class,'quiz'])->name('lesson.quiz');
+Route::post('quiz/{lesson}/submit', [LessonQuizController::class, 'submit'])->name('quiz.submit');
+Route::get('quiz/{lesson}/result/{score}', [LessonQuizController::class, 'result'])->name('quiz.result');
+ 
 
 Route::get('/',[SiteHomeController::class,'index'])->name('home');
 

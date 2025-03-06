@@ -2,11 +2,7 @@
 
 @section('content')
 @push('styles')
-<style>
-    .page-title nav ol li+li::before{
-        padding-left: 10px !important;
-    }
-</style>
+ 
 @endpush
 <main class="main">
 
@@ -22,14 +18,6 @@
           </div>
         </div>
       </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">الصفحة الرئيسية</a></li>
-            <li class="current">اختبار تحديد المستوى</li>
-          </ol>
-        </div>
-      </nav>
     </div><!-- End Page Title -->
 
     <!-- Starter Section Section -->
@@ -38,7 +26,7 @@
        
 
       <div class="container" data-aos="fade-up">
-       
+        
       </div>
 
     </section>

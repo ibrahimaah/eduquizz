@@ -58,7 +58,8 @@ class QuestionController extends Controller
         }
         DB::commit();
 
-        return redirect()->route('admin.questions', $lesson->id)->with('success', 'تم إضافة السؤال بنجاح');
+        // return redirect()->route('admin.questions', $lesson->id)->with('success', 'تم إضافة السؤال بنجاح');
+        return redirect()->back()->with('success', 'تم إضافة السؤال بنجاح');
     }
 
     public function edit(Question $question)
