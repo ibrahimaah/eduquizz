@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthController as SiteAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\PlacementTestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController as SiteHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,13 +97,12 @@ Route::middleware(['auth'])->group(function ()
 });
 Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
 Route::get('placement-test-questions',[PlacementTestController::class,'index'])->name('placement_test');
+Route::post('submit-placement-test',[PlacementTestController::class,'submitTest'])->name('placement_test.submit');
 Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLoginForm');
 Route::post('login',[SiteAuthController::class,'login'])->name('login');
 Route::get('register',[SiteAuthController::class,'showRegisterForm'])->name('showRegisterForm');
 Route::post('register',[SiteAuthController::class,'register'])->name('register');
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/',[SiteHomeController::class,'index'])->name('home');
 
 

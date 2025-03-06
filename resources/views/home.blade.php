@@ -53,7 +53,7 @@
 </section><!-- /About Section -->
 
 <!-- Counts Section -->
-<section id="counts" class="section counts light-background">
+{{-- <section id="counts" class="section counts light-background">
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -65,7 +65,7 @@
             class="purecounter"></span>
           <p>مادة تعليمية</p>
         </div>
-      </div><!-- End Stats Item -->
+      </div>
 
       <div class="col-md-4">
         <div class="stats-item text-center w-100 h-100">
@@ -73,7 +73,7 @@
             class="purecounter"></span>
           <p>فصل دراسي</p>
         </div>
-      </div><!-- End Stats Item -->
+      </div>
 
       <div class="col-md-4">
         <div class="stats-item text-center w-100 h-100">
@@ -81,7 +81,7 @@
             class="purecounter"></span>
           <p>اختبار</p>
         </div>
-      </div><!-- End Stats Item -->
+      </div>
 
 
 
@@ -90,7 +90,8 @@
 
   </div>
 
-</section><!-- /Counts Section -->
+</section> --}}
+<!-- /Counts Section -->
 
 
 <!-- مواد دراسية مدرسية Section -->
@@ -106,55 +107,25 @@
 
     <div class="row">
 
+      @foreach ($subjects as $subject)
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
         <div class="course-item">
-          <img src="{{ asset('site/img/course-1.jpg') }}" class="img-fluid" alt="...">
+          <img src="{{ $subject->getFirstMediaUrl('subjects') }}" class="img-fluid" alt="...">
           <div class="course-content">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="category">رياضيات</p>
+              <p class="category">برمجة</p>
 
             </div>
 
-            <h3><a href="course-details.html">الجبر</a></h3>
-            <p class="description">مقدمة في الجبر والدوال الرياضية وكيفية استخدامها في حل المعادلات والمشاكل
-              الرياضية المختلفة.</p>
+            <h3><a href="">{{ $subject->title }}</a></h3>
+            <p class="description">
+              {{ $subject->description }}
+            </p>
 
           </div>
         </div>
-      </div> <!-- End Course Item-->
-
-      <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-        <div class="course-item">
-          <img src="{{ asset('site/img/course-2.jpg') }}" class="img-fluid" alt="...">
-          <div class="course-content">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="category">الفيزياء</p>
-
-            </div>
-
-            <h3><a href="course-details.html">الميكانيكا</a></h3>
-            <p class="description">دراسة قوانين الحركة والطاقة وكيفية تأثيرها على الأجسام في النظام الفيزيائي.</p>
-
-          </div>
-        </div>
-      </div> <!-- End Course Item-->
-
-      <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-        <div class="course-item">
-          <img src="{{ asset('site/img/course-3.jpg') }}" class="img-fluid" alt="...">
-          <div class="course-content">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="category">اللغة الإنجليزية</p>
-
-            </div>
-
-            <h3><a href="course-details.html">قواعد اللغة الإنجليزية</a></h3>
-            <p class="description">دورة تدريبية لفهم القواعد الأساسية في اللغة الإنجليزية بما في ذلك النحو
-              والمفردات.</p>
-
-          </div>
-        </div>
-      </div> <!-- End Course Item-->
+      </div> 
+      @endforeach
 
     </div>
 
