@@ -32,26 +32,35 @@
     <!-- Lessons Section -->
     <section id="lessons-section" class="section">
       <div class="container" data-aos="fade-up">
-        <div class="row">
+        <div class="row justify-content-center">
           @foreach($lessons as $lesson)
-          <div class="col-md-6">
-            <div class="card lesson-card shadow-sm p-3 mb-4">
+          @php
+            $isCardDisabled = $lesson->id > $user_current_lesson->id;  // Example condition to disable the card
+          @endphp
+          <div class="col-md-8">
+            <div class="card lesson-card shadow-sm p-3 mb-4" 
+                 @if($isCardDisabled) 
+                   style="pointer-events: none; opacity: 0.5;" 
+                 @endif>
               <div class="card-body">
+                <p class="text-muted">الدرس <span class="">{{ $lesson->order }}</span></p>
                 <h4 class="card-title">{{ $lesson->title }}</h4>
-                <p class="text-muted">رقم الدرس {{ $lesson->order }}</p>
+                
                 <p>{{ $lesson->description }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <a href="{{ $lesson->tutorial_link }}" target="_blank" class="btn btn-primary">
-                    <i class="bi bi-play-circle"></i> شاهد الدرس
+                     <span>شاهد الدرس</span><span> &nbsp;<i class="bi bi-play-circle"></i></span>
                   </a>
+                  
                   <a href="{{ route('lesson.quiz', ['lesson' => $lesson->id]) }}" class="btn btn-warning">
-                    <i class="bi bi-question-circle"></i> بدء الاختبار
+                     بدء الاختبار &nbsp;<i class="bi bi-question-circle"></i>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-          @endforeach
+        @endforeach
+        
         </div>
       </div>
     </section>

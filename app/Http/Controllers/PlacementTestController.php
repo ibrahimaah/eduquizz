@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\PlacementTestQuestion;
 use Illuminate\Http\Request; 
-use App\Models\PlacementTestOption; 
+use App\Models\PlacementTestOption;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 class PlacementTestController extends Controller
 {
@@ -13,17 +15,33 @@ class PlacementTestController extends Controller
     // $jsonPath = public_path('questions.json');
     // $questions = json_decode(file_get_contents($jsonPath), true);
 
+    private function redirect_if_already_pass()
+    {
+        //check if already pass the placement test
+        /** @var User  $user */
+        $user = Auth::user();
+
+        if ($user->lessons()->exists()) 
+        {
+            return redirect()->route('home');
+        }
+    }
     public function index()
     {
+        return $this->redirect_if_already_pass();
+
         $questions = PlacementTestQuestion::all();
         // dd($questions);
         return view('site.placement_test.index', compact('questions'));
+        
     }
 
     public function init() {}
 
     public function submitTest(Request $request)
     {
+        return $this->redirect_if_already_pass();
+
         $userAnswers = $request->all(); // Get all submitted answers
         
         $results = [];
@@ -65,19 +83,22 @@ class PlacementTestController extends Controller
         // $percentage = round(($score / $totalQuestions) * 100, 2);
  
         // Calculate the user level based on the score
-        $student_level = "Beginner";
+        $student_level = "مبتدئ";
         
         if ($score >= 0 && $score <= 8) 
         {
-            $student_level = 'Beginner';
+            $student_level = 'مبتدئ';
+            Auth::user()->lessons()->attach(Subject::find(1)->levels[0]->lessons[0]->id);
         } 
         elseif ($score >= 9 && $score <= 16) 
         {
-            $student_level = 'Intermediate';
+            $student_level = 'متوسط';
+            Auth::user()->lessons()->attach(Subject::find(1)->levels[2]->lessons[0]->id);
         } 
         else 
         {
-            $student_level = 'Advanced';
+            $student_level = 'متقدم';
+            Auth::user()->lessons()->attach(Subject::find(1)->levels[4]->lessons[0]->id);
         }  
  
 

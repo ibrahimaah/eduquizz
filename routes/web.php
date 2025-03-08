@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController as SiteHomeController;
 use App\Http\Controllers\LevelController as SiteLevelController;
 use App\Http\Controllers\LessonController as SiteLessonController;
 use App\Http\Controllers\LessonQuizController;
+use App\Models\Subject;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,5 +117,9 @@ Route::get('quiz/{lesson}/result/{score}', [LessonQuizController::class, 'result
  
 
 Route::get('/',[SiteHomeController::class,'index'])->name('home');
+Route::get('tmp',function(){
+    $tmp = Subject::find(1)->levels;
+    dd($tmp);
+});
 
 
