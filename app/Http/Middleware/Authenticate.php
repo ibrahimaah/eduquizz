@@ -13,14 +13,15 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        // if (Auth::check()) 
-        // {
-        //     if (Auth::user()->role == 'admin') 
-        //     {
-        //         return $request->expectsJson() ? null : route('admin_dashboard');
-        //     }
-        // }
-        
-        return $request->expectsJson() ? null : route('admin.login');
+        if ($request->expectsJson()) {
+            return null; // API requests should not be redirected
+        }
+
+        // Check if the request is for an admin route
+        if ($request->is('admin/*')) {
+            return route('admin.login'); // Redirect to admin login
+        }
+
+        return route('login'); // Default redirect to user login
     }
 }

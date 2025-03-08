@@ -41,6 +41,7 @@ class AuthController extends Controller
             'age' => $request->age,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user'
         ]);
 
         // Log the user in

@@ -33,6 +33,15 @@
           </div>
         </div>
       </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="{{ route('subject.levels',$lesson->level->subject->id) }}">{{ $lesson->level->subject->title }}</a></li>
+            <li><a href="{{ route('level.lessons',$lesson->level->id) }}">{{ $lesson->level->title }}</a></li>
+            <li class="current"> اختبار - {{ $lesson->title }}</li>
+          </ol>
+        </div>
+      </nav>
     </div>
     <!-- نهاية عنوان الصفحة -->
 
@@ -71,8 +80,10 @@
           @endforeach
 
           <div class="text-center mt-4">
-            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> إرسال الاختبار</button>
+            <button type="submit" class="btn btn-success"> إرسال الإجابات <i class="bi bi-check-circle"></i> </button>
+            <a href="{{ route('level.lessons',$lesson->level->id) }}" class="btn btn-danger">إلغاء</a>
           </div>
+          
         </form>
       </div>
     </section>

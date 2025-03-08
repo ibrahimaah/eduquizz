@@ -24,8 +24,8 @@
                 <td>{{ $user->email }}</td>
                 <td>
                     {{-- <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info">Show</a> --}}
-                    <a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">تعديل</a>
-                    <form action="{{ route('admin.users.delete',  ['id' => $user->id]) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning">تعديل</a>
+                    <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline;">
                         @csrf 
                         <button type="submit" class="btn btn-sm btn-danger">حذف</button>
                     </form>

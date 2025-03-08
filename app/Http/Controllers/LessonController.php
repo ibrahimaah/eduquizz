@@ -14,10 +14,13 @@ class LessonController extends Controller
         $user = Auth::user();
         $user_current_lesson = $user->lessons()->latest('lesson_user.created_at')->first();
 
-        if ($level->id > $user_current_lesson->level->id) {
+        if ($level->id > $user_current_lesson->level->id) 
+        {
             abort(403, "عزيزي الطالب، عذرًا، لا يحق لك الوصول إلى الدروس في هذا المستوى.");
         }
+
         $lessons = $level->lessons()->orderBy('order')->get();
+        
         return view('site.lessons', compact('lessons','level','user_current_lesson'));
     }
 }

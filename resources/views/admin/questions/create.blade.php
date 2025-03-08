@@ -104,7 +104,7 @@
 
         <div class="mb-4 text-center">
             <button type="submit" class="btn btn-success">إضافة</button>
-            <a href="{{ route('admin.lessons',$lesson->id) }}" class="btn btn-secondary">إلغاء</a>
+            <a href="{{ route('admin.questions',$lesson->id) }}" class="btn btn-secondary">إلغاء</a>
         </div>
     </form>
 </div>

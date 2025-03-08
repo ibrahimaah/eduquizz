@@ -40,6 +40,14 @@
         </div>
       </div>
     </div>
+    <nav class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="{{ route('home') }}">الصفحة الرئيسية</a></li>
+          <li class="current">{{ $subject->title }}</li>
+        </ol>
+      </div>
+    </nav>
   </div>
   <!-- End Page Title -->
 

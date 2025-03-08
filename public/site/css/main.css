@@ -1929,3 +1929,6 @@ section,
   font-weight: 900;
   font-style: normal;
 }
+.page-title nav ol li+li::before {
+  padding-left:10px !important;
+}

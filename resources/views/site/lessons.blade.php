@@ -26,6 +26,14 @@
           </div>
         </div>
       </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="{{ route('subject.levels',$level->subject->id) }}">{{ $level->subject->title }}</a></li>
+            <li class="current">{{ $level->title }}</li>
+          </ol>
+        </div>
+      </nav>
     </div>
     <!-- End Page Title -->
 
@@ -52,9 +60,11 @@
                      <span>شاهد الدرس</span><span> &nbsp;<i class="bi bi-play-circle"></i></span>
                   </a>
                   
+                  @if($lesson->id >= $user_current_lesson->id)
                   <a href="{{ route('lesson.quiz', ['lesson' => $lesson->id]) }}" class="btn btn-warning">
                      بدء الاختبار &nbsp;<i class="bi bi-question-circle"></i>
                   </a>
+                  @endif
                 </div>
               </div>
             </div>

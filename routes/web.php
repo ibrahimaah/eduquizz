@@ -31,14 +31,14 @@ use App\Models\Subject;
 
 //Authentication routes
 Route::controller(AuthController::class)->group(function () {
-    Route::get('admin/login', 'getLoginForm')->name('admin.getLoginForm');
-    Route::post('admin/login', 'login')->name('admin.login');
-    Route::get('admin/logout', 'logout')->name('admin.logout');
+    Route::get('admin-login', 'getLoginForm')->name('admin.getLoginForm');
+    Route::post('admin-login', 'login')->name('admin.login');
+    Route::get('admin-logout', 'logout')->name('admin.logout');
 });
 
 
 
-Route::middleware(['auth'])->prefix('admin')->group(function () 
+Route::middleware(['auth','admin'])->prefix('admin')->group(function () 
 {
     Route::get('/', [HomeController::class, 'index'])->name('admin_dashboard');
     Route::get('statistics', [StatisticController::class, 'index'])->name('admin.statistics');
@@ -97,11 +97,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function ()
 
 Route::middleware(['auth'])->group(function () 
 {
-    
+    Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
+    Route::get('placement-test-questions',[PlacementTestController::class,'index'])->name('placement_test');
+    Route::post('submit-placement-test',[PlacementTestController::class,'submitTest'])->name('placement_test.submit');
+
+    Route::get('subjects/{subject}/levels',[SiteLevelController::class,'index'])->name('subject.levels');
+    Route::get('levels/{level}/lessons',[SiteLessonController::class,'index'])->name('level.lessons');
+    Route::get('lessons/{lesson}/quiz',[LessonQuizController::class,'quiz'])->name('lesson.quiz');
+    Route::post('quiz/{lesson}/submit', [LessonQuizController::class, 'submit'])->name('quiz.submit');
+    Route::get('quiz/{lesson}/result', [LessonQuizController::class, 'result'])->name('quiz.result');
 });
-Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
-Route::get('placement-test-questions',[PlacementTestController::class,'index'])->name('placement_test');
-Route::post('submit-placement-test',[PlacementTestController::class,'submitTest'])->name('placement_test.submit');
+
 Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLoginForm');
 Route::post('login',[SiteAuthController::class,'login'])->name('login');
 Route::get('register',[SiteAuthController::class,'showRegisterForm'])->name('showRegisterForm');
@@ -109,11 +115,7 @@ Route::post('register',[SiteAuthController::class,'register'])->name('register')
 Route::post('logout',[SiteAuthController::class,'logout'])->name('logout');
 
 
-Route::get('subjects/{subject}/levels',[SiteLevelController::class,'index'])->name('subject.levels');
-Route::get('levels/{level}/lessons',[SiteLessonController::class,'index'])->name('level.lessons');
-Route::get('lessons/{lesson}/quiz',[LessonQuizController::class,'quiz'])->name('lesson.quiz');
-Route::post('quiz/{lesson}/submit', [LessonQuizController::class, 'submit'])->name('quiz.submit');
-Route::get('quiz/{lesson}/result/{score}', [LessonQuizController::class, 'result'])->name('quiz.result');
+
  
 
 Route::get('/',[SiteHomeController::class,'index'])->name('home');
