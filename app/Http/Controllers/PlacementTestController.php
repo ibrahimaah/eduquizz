@@ -33,7 +33,8 @@ class PlacementTestController extends Controller
             return $redirect;
         }
 
-        $questions = PlacementTestQuestion::all();
+        $questions = PlacementTestQuestion::all()->shuffle();
+
         // dd($questions);
         return view('site.placement_test.index', compact('questions'));
     }

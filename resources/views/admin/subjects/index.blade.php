@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <h1 class="text-success m-4">إدارة المواد</h1>
-    <a href="{{ route('admin.subjects.create') }}" class="btn btn-primary mb-3">إضافة مادة جديدة</a>
+    {{-- <a href="{{ route('admin.subjects.create') }}" class="btn btn-primary mb-3">إضافة مادة جديدة</a> --}}
+    <a href="#" class="btn btn-primary mb-3 disabled" onclick="return false;">إضافة مادة جديدة</a>
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -30,8 +32,9 @@
                     <a href="{{ route('admin.subjects.edit', $subject->id) }}" class="btn btn-sm btn-warning">تعديل</a>
                     <form action="{{ route('admin.subjects.delete',  $subject->id) }}" method="POST" style="display:inline;">
                         @csrf 
-                        <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                        <button type="submit" class="btn btn-sm btn-danger" disabled>حذف</button>
                     </form>
+                    
                     <a href="{{ route('admin.levels', $subject->id) }}" class="btn btn-sm btn-secondary">إدارة المستويات</a>
                 </td>
             </tr>

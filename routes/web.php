@@ -105,7 +105,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('levels/{level}/lessons',[SiteLessonController::class,'index'])->name('level.lessons');
     Route::get('lessons/{lesson}/quiz',[LessonQuizController::class,'quiz'])->name('lesson.quiz');
     Route::post('quiz/{lesson}/submit', [LessonQuizController::class, 'submit'])->name('quiz.submit');
-    Route::get('quiz/{lesson}/result', [LessonQuizController::class, 'result'])->name('quiz.result');
+    // Route::get('quiz/{lesson}/result', [LessonQuizController::class, 'result'])->name('quiz.result');
 });
 
 Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLoginForm');

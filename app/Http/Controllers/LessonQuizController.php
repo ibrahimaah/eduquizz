@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LessonQuizController extends Controller
 {
-    public function result(Request $request,Lesson $lesson)
-    {  
-        $score = $request->score;
-        $next_lesson = $request->next_lesson;
-        $is_succeed = $request->is_succeed;
-        return view('site.quiz.result', compact(['lesson','score','next_lesson','is_succeed']));
-    }
+    // public function result(Request $request)
+    // {  
+    //     dd($request->all());
+    //     $score = $request->score;
+    //     $next_lesson = $request->next_lesson;
+    //     $lesson = $request->lesson;
+    //     $is_succeed = $request->is_succeed;
+    //     return view('site.quiz.result', compact(['lesson','score','next_lesson','is_succeed']));
+    // }
 
     public function quiz(Lesson $lesson)
     {
@@ -30,6 +32,10 @@ class LessonQuizController extends Controller
         $lesson = Lesson::findOrFail($lessonId);
         $questions = $lesson->questions;
 
+        if($questions->count() == 0)
+        {
+            dd("لم يتم إضافة أسئلة لهذا الدرس من قبل الأدمن");
+        }
         $correctAnswers = 0;
         $totalQuestions = $questions->count();
 
@@ -92,10 +98,11 @@ class LessonQuizController extends Controller
             else
             {
                 $next_lesson = Lesson::where('id', '>', $lessonId)->orderBy('id')->first();
-
+                // dd($next_lesson);
                 if ($next_lesson) 
                 {
                     Auth::user()->lessons()->attach($next_lesson->id);
+                    
                 }
                 else 
                 {
@@ -104,11 +111,20 @@ class LessonQuizController extends Controller
             }
             
         }
-        
-        return redirect()->route('quiz.result', ['lesson' => $lessonId, 
+        else 
+        {
+            $next_lesson = $lesson;
+        }
+        // dd($next_lesson);
+        return view('site.quiz.result', ['lesson' => $lessonId, 
                                                  'score' => $score,
                                                  'next_lesson' => $is_succeed ? $next_lesson : null,
                                                  'is_succeed'=> $is_succeed]);
+
+        // return redirect()->route('quiz.result', ['lesson' => $lessonId, 
+        //                                          'score' => $score,
+        //                                          'next_lesson' => $is_succeed ? $next_lesson : null,
+        //                                          'is_succeed'=> $is_succeed]);
     }
 
 }

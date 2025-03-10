@@ -19,7 +19,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.subjects.update', ['id' => $subject->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.subjects.update', $subject->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf 
 
                 <div class="mb-3">
