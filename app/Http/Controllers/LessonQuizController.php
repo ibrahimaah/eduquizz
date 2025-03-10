@@ -94,6 +94,11 @@ class LessonQuizController extends Controller
                     }
                     
                 }
+                else 
+                {
+                    $next_lesson = null;
+                }
+                
             }
             else
             {
@@ -115,6 +120,8 @@ class LessonQuizController extends Controller
         {
             $next_lesson = $lesson;
         }
+
+      
         // dd($next_lesson);
         return view('site.quiz.result', ['lesson' => $lessonId, 
                                                  'score' => $score,
