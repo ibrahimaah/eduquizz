@@ -5,7 +5,7 @@
 <!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
 
-  <img src="{{ asset('site/img/hero-bg.jpg') }}" alt="" data-aos="fade-in">
+  <img src="{{ asset('site/img/hero-bg.jfif') }}" alt="" data-aos="fade-in">
 
   <div class="container">
     <h2 data-aos="fade-up" data-aos-delay="100">اكتسب المعرفة اليوم <br>واصنع المستقبل غدًا</h2>

@@ -4,10 +4,34 @@
 <main class="main mb-5">
     <div class="container text-center mt-5">
         <h2 class="alert alert-info">تم إكمال الاختبار!</h2>
-        <h3>درجتك: {{ $score }}%</h3>
+        
+                <div class="alert alert-warning">
+                    <h3>درجتك: {{ $score }}%</h3>
+                </div>
+             
+           
+                @if($is_succeed && $next_lesson)
+                    <div class="alert alert-success text-center fw-bold my-4">
+                        {{ $successMessages[array_rand($successMessages)] }}
+                    </div>
+                @else  
+                <div class="alert alert-warning text-center fw-bold my-4">
+                    {{ $failureMessages[array_rand($failureMessages)] }}
+                </div>
+                @endif
+             
+        
+
+        <div class="alert alert-light my-2">
+            <h4 class="my-3">مستوى التقدم في الدروس :</h4>
+        <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" style="width: {{ $progress }}%;">{{ $progress }}%</div>
+        </div>
+        </div>
 
         @if ($is_succeed)
             @if($next_lesson)
+               
                 <a href="{{ route('level.lessons', ['level' => $next_lesson->level->id]) }}" class="btn btn-success mt-3">
                     متابعة <i class="bi bi-arrow-left"></i>
                 </a>
@@ -35,8 +59,10 @@
                 <!-- End Certificate -->
             @endif
         @else 
-            <div class="alert alert-warning text-center fw-bold my-4">
-                يجب أن يكون مجموعك أكبر من 80% لتتمكن من مشاهدة الدرس التالي. حظًا موفقًا!
+           
+            
+            <div class="alert alert-info text-center fw-bold my-4">
+                ملاحظة : يجب أن يكون مجموعك أكبر من 80% لتتمكن من مشاهدة الدرس التالي. حظًا موفقًا!
             </div>
             <a href="{{ route('level.lessons', ['level' => $lesson->level_id]) }}" class="btn btn-success mt-3">
                 العودة إلى الدروس <i class="bi bi-arrow-right"></i>

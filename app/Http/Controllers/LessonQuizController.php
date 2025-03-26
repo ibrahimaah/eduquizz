@@ -121,12 +121,43 @@ class LessonQuizController extends Controller
             $next_lesson = $lesson;
         }
 
-      
+        $successMessages = [
+            "أحسنت! استمر في هذا التفوق!",
+            "رائع! اجتهادك يؤتي ثماره!",
+            "مبروك! لقد اجتزت هذا الاختبار بنجاح!",
+            "عمل رائع! واصل تقدمك!"
+        ];
+        
+        $failureMessages = [
+            "لا بأس! المحاولة هي بداية النجاح.",
+            "تعلم من الأخطاء، وستكون أقوى في المرة القادمة!",
+            "الفشل مجرد خطوة في طريق النجاح، لا تستسلم!",
+            "حاول مرة أخرى، فأنت قادر على تحقيق النجاح!"
+        ];
+        
+        $progress = 0;
+        $subject = $lesson->level->subject;
+        $num_of_lessons = $subject->getNumOfLessons();
+        /** @var \App\Models\User $current_user */
+        $current_user = Auth::user();
+        $num_of_passed_lessons = $current_user->lessons()->count();
+        if($num_of_lessons == 0)
+        {
+            $progress = 0;
+        }
+        else 
+        {
+            $progress = ($num_of_passed_lessons / $num_of_lessons) * 100;
+            $progress = number_format($progress, 2);
+        }
         // dd($next_lesson);
-        return view('site.quiz.result', ['lesson' => $lessonId, 
+        return view('site.quiz.result', ['lesson' => $lesson, 
                                                  'score' => $score,
                                                  'next_lesson' => $is_succeed ? $next_lesson : null,
-                                                 'is_succeed'=> $is_succeed]);
+                                                 'is_succeed'=> $is_succeed,
+                                                'successMessages' => $successMessages,
+                                                'failureMessages' => $failureMessages,
+                                            'progress' => $progress]);
 
         // return redirect()->route('quiz.result', ['lesson' => $lessonId, 
         //                                          'score' => $score,

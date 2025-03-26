@@ -90,8 +90,8 @@
                             </div>
                         </div>
                         <!-- Image Section -->
-                        <div class="col-md-6">
-                            <img src="{{ asset('imgs/login_img.webp') }}" alt="Website Image" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover;">
+                        <div class="col-md-6 p-4">
+                            <img src="{{ asset('imgs/login_img.jpeg') }}" alt="Website Image" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover;">
                         </div>
                     </div>
                 </div>
