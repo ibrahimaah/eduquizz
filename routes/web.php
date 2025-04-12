@@ -16,7 +16,9 @@ use App\Http\Controllers\HomeController as SiteHomeController;
 use App\Http\Controllers\LevelController as SiteLevelController;
 use App\Http\Controllers\LessonController as SiteLessonController;
 use App\Http\Controllers\LessonQuizController;
+use App\Models\Lesson;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,8 @@ use App\Models\Subject;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+ 
+ 
 //Authentication routes
 Route::controller(AuthController::class)->group(function () {
     Route::get('admin-login', 'getLoginForm')->name('admin.getLoginForm');
@@ -97,7 +100,7 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function ()
 
 Route::middleware(['auth'])->group(function () 
 {
-    Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
+    // Route::get('init-placement-test-questions',[PlacementTestController::class,'init'])->name('init_placement_test');
     Route::get('placement-test-questions',[PlacementTestController::class,'index'])->name('placement_test');
     Route::post('submit-placement-test',[PlacementTestController::class,'submitTest'])->name('placement_test.submit');
 
@@ -119,9 +122,6 @@ Route::post('logout',[SiteAuthController::class,'logout'])->name('logout');
  
 
 Route::get('/',[SiteHomeController::class,'index'])->name('home');
-Route::get('tmp',function(){
-    $tmp = Subject::find(1)->levels;
-    dd($tmp);
-});
+ 
 
 

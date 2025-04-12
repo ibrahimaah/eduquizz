@@ -22,6 +22,15 @@ class LessonQuizController extends Controller
 
     public function quiz(Lesson $lesson)
     {
+         /** @var User $user */
+         $user = Auth::user();
+         $user_current_lesson = $user->lessons()->latest('lesson_user.created_at')->first();
+
+        if ($lesson->level->id > $user_current_lesson->level->id) 
+        {
+            abort(403, "عزيزي الطالب، عذرًا، لا يحق لك الوصول إلى هذا المستوى.");
+        }
+
         $questions = Question::where('lesson_id', $lesson->id)->with('options')->orderBy('question_number')->get();
         
         return view('site.quiz.index', compact('lesson', 'questions'));
@@ -30,6 +39,7 @@ class LessonQuizController extends Controller
     public function submit(Request $request, $lessonId)
     {
         $lesson = Lesson::findOrFail($lessonId);
+        
         $questions = $lesson->questions;
 
         if($questions->count() == 0)
@@ -140,13 +150,14 @@ class LessonQuizController extends Controller
         $num_of_lessons = $subject->getNumOfLessons();
         /** @var \App\Models\User $current_user */
         $current_user = Auth::user();
-        $num_of_passed_lessons = $current_user->lessons()->count();
+        $num_of_passed_lessons = getNumOfPassedLessons($current_user->id);
         if($num_of_lessons == 0)
         {
             $progress = 0;
         }
         else 
         {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             $progress = ($num_of_passed_lessons / $num_of_lessons) * 100;
             $progress = number_format($progress, 2);
         }

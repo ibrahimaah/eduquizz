@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Lesson;
+use App\Models\User;
+
 if (!function_exists('getArabicOrdinal')) {
     function getArabicOrdinal($number) {
         $ordinals = [
@@ -12,5 +15,27 @@ if (!function_exists('getArabicOrdinal')) {
         ];
     
         return $ordinals[$number] ?? $number;
+    }
+}
+
+if(!function_exists('getNumOfPassedLessons'))
+{
+    function getNumOfPassedLessons($user_id)
+    { 
+        $user = User::findOrFail($user_id);
+
+        $current_user_lesson = $user->lessons()->orderBy('created_at', 'DESC')->first();
+
+        if($current_user_lesson)
+        {
+            $current_user_lesson_id = $current_user_lesson->id;
+            $num_of_passed_lessons = Lesson::where('id', '<=', $current_user_lesson_id)->count();
+        }
+        else 
+        {
+            $num_of_passed_lessons = 0;
+        }
+        
+        return $num_of_passed_lessons;
     }
 }

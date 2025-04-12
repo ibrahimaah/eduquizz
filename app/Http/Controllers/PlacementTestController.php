@@ -39,7 +39,7 @@ class PlacementTestController extends Controller
         return view('site.placement_test.index', compact('questions'));
     }
 
-    public function init() {}
+    // public function init() {}
 
     public function submitTest(Request $request)
     {
@@ -58,11 +58,13 @@ class PlacementTestController extends Controller
                 $questionId = str_replace('question_', '', $key);
                 $question = PlacementTestQuestion::find($questionId);
 
-                if ($question) {
+                if ($question) 
+                {
                     $correctOption = $question->options()->where('is_correct', true)->first();
                     $isCorrect = $correctOption && $correctOption->id == $selectedOptionId;
 
-                    if ($isCorrect) {
+                    if ($isCorrect) 
+                    {
                         if ($question->level == 'easy') {
                             $score += 1;
                         } elseif ($question->level == 'medium') {
