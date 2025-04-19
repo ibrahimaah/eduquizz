@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController as SiteHomeController;
 use App\Http\Controllers\LevelController as SiteLevelController;
 use App\Http\Controllers\LessonController as SiteLessonController;
 use App\Http\Controllers\LessonQuizController;
+use App\Http\Controllers\SupportController;
 use App\Models\Lesson;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
@@ -109,6 +110,8 @@ Route::middleware(['auth'])->group(function ()
     Route::get('lessons/{lesson}/quiz',[LessonQuizController::class,'quiz'])->name('lesson.quiz');
     Route::post('quiz/{lesson}/submit', [LessonQuizController::class, 'submit'])->name('quiz.submit');
     // Route::get('quiz/{lesson}/result', [LessonQuizController::class, 'result'])->name('quiz.result');
+    Route::post('/student-problem', [SupportController::class, 'submit'])->name('student.problem.submit');
+
 });
 
 Route::get('login',[SiteAuthController::class,'showLoginForm'])->name('showLoginForm');

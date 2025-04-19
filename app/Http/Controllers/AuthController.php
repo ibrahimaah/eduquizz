@@ -25,7 +25,7 @@ class AuthController extends Controller
         // Validate the form data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'age' => 'required|integer|max:18',
+            'age' => 'required|integer|max:18|min:10',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
