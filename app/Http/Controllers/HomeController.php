@@ -12,4 +12,14 @@ class HomeController extends Controller
         $subjects = Subject::all();
         return view('home',compact('subjects'));
     }
+
+    public function about()
+    {  
+        return view('about');
+    }
+
+    public function contact()
+    {  
+        return view('contact');
+    }
 }

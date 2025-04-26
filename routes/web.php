@@ -125,6 +125,8 @@ Route::post('logout',[SiteAuthController::class,'logout'])->name('logout');
  
 
 Route::get('/',[SiteHomeController::class,'index'])->name('home');
+Route::get('/about',[SiteHomeController::class,'about'])->name('about');
+Route::get('/contact',[SiteHomeController::class,'contact'])->name('contact');
  
 
 

@@ -6,9 +6,22 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{ route('home') }}" class="active pe-0">الصفحة الرئيسية</a></li>
-                <li><a href="#about">من نحن</a></li>
-                <li><a href="#courses">المواد التعليمية</a></li>
+                <li>
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }} pe-0">
+                        الصفحة الرئيسية
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">
+                        من نحن
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">
+                        تواصل معنا
+                    </a>
+                </li>
+                
                 {{-- <li><a href="#">تواصل معنا</a></li> --}}
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
